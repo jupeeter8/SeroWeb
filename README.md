@@ -11,7 +11,9 @@ __Team Sero is a three memeber team.__
 * Firebase
 
 ---
+
 ### Our Goal
 Is to spread awareness about the growing issues of mental wellness, help individuals dealing with mental and emotional issues and to provide a safe place for individuals to seek help.
+
 ---
 ![Homepage](/images/homepage.png)
