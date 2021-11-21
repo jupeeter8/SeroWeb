@@ -7,7 +7,7 @@ __Team Sero is a three memeber team.__
 * Quasar Framework
 * Vue.js
 * HTML5
-* CSS
+* SASS
 * Firebase
 
 ---
