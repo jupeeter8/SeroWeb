@@ -31,7 +31,7 @@
     <q-separator size="7px" color="grey-3" />
 
     <q-list class="q-py-lg q-px-xl" separator>
-      <q-item 
+      <q-item
         v-for="post in postitem"
         :key="post.date"
         class="q-py-md"
@@ -45,7 +45,7 @@
         <q-item-section>
           <q-item-label class="text-subtitle1">
             <b>Anirudh Aswal</b>
-            <span class="text-grey-7">@aswalanirudh</span>
+            <span class="text-grey-7">@Jannet</span>
           </q-item-label>
 
           <q-item-label class="Post-Content text-body1">
