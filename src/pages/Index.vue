@@ -44,7 +44,7 @@
 
         <q-item-section>
           <q-item-label class="text-subtitle1">
-            <b>Anirudh Aswal</b>
+            <b>Junglee</b>
             <span class="text-grey-7">@Jannet</span>
           </q-item-label>
 
