@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHr lpR lFr">
+  <q-layout view="lHr lpR lFr" >
     <q-header bordered class="bg-white text-black">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
@@ -22,6 +22,7 @@
       v-model="leftDrawerOpen"
       side="left"
       bordered
+      dark
       :width="250"
     >
       <q-icon name="fas fa-brain" size="lg" color="primary" class="q-pa-md" />
@@ -78,6 +79,7 @@
       v-model="rightDrawerOpen"
       side="right"
       bordered
+      dark
       :width="250"
     >
       <q-input
@@ -101,7 +103,7 @@
             <q-item-label lines="1"
               >Dealing with pandemic stress? You are not alone</q-item-label
             >
-            <q-item-label caption lines="2"
+            <q-item-label caption lines="2"  class="text-white"
               >Studies show that Americans are reporting an increase in mental
               health issues, as well as substance abuse issues. A Kaiser Family
               Foundation (KFF) poll said that 53% of Americans
@@ -110,7 +112,7 @@
           </q-item-section>
 
           <q-item-section side top>
-            <q-item-label caption>5 min ago</q-item-label>
+            <q-item-label caption>5 min ago</q-item-label> 
             <q-icon name="star" color="yellow" />
           </q-item-section>
         </q-item>
@@ -163,3 +165,5 @@ export default {
   },
 };
 </script>
+
+
