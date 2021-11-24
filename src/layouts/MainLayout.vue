@@ -100,10 +100,10 @@
       <q-list separator>
         <q-item>
           <q-item-section>
-            <q-item-label lines="1"
-              >Dealing with pandemic stress? You are not alone</q-item-label
+            <q-item-label lines="1" class="text-weight-xl"
+              ><strong>Dealing with pandemic stress? You are not alone</strong></q-item-label
             >
-            <q-item-label caption lines="2"  class="text-white"
+            <q-item-label caption lines="2"  class="text-grey"
               >Studies show that Americans are reporting an increase in mental
               health issues, as well as substance abuse issues. A Kaiser Family
               Foundation (KFF) poll said that 53% of Americans
@@ -112,7 +112,7 @@
           </q-item-section>
 
           <q-item-section side top>
-            <q-item-label caption>5 min ago</q-item-label> 
+            <q-item-label caption class="text-grey">5 min ago</q-item-label> 
             <q-icon name="star" color="yellow" />
           </q-item-section>
         </q-item>
