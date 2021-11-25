@@ -1,6 +1,6 @@
 <template>
   <q-page class="relative-position">
-     <q-scroll-area class="absolute fullscreen">
+     <q-scroll-area class="absolute full-width full-height">
       <div class="q-py-lg q-px-xl">
         <q-input
           size="md"
@@ -40,7 +40,7 @@
         >
           <q-item
             v-for="post in postitem"
-            :key="post.date"
+            :key="post.id"
             class="q-py-md postBorder"
           >
             <q-item-section avatar top>
@@ -64,7 +64,13 @@
               <div class="post-icon row justify-between q-mt-sm">
                 <q-btn flat round color="grey" icon="comment" />
 
-                <q-btn flat round color="grey" icon="favorite_border" />
+                <q-btn
+                @click="toggleLiked(post)" 
+                flat 
+                round 
+                :color="post.liked? 'primary' : 'grey'"
+                :icon="post.liked? 'favorite' : 'favorite_border'"
+                />
 
                 <q-btn 
                   flat 
@@ -85,7 +91,7 @@
 
 <script>
 import firestore from 'src/boot/firebase'
-import { collection, query, onSnapshot, doc } from "firebase/firestore";
+import { collection, query, onSnapshot, doc, orderBy, addDoc, deleteDoc, updateDoc} from "firebase/firestore";
 import { formatDistance} from 'date-fns'
 
 import { defineComponent } from "vue";
@@ -97,16 +103,6 @@ export default defineComponent({
       newPost: "",
 
       postitem: [
-        // {
-        //   content:
-        //     "This is a post",
-        //     date: 1637481665022
-        // },
-        // {
-        //   content:
-        //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id velit ut tortor pretium viverra suspendisse potenti nullam ac. Ut tellus elementum sagittis vitae et. Enim neque volutpat ac tincidunt vitae semper quis lectus. Tellus in metus vulputate eu scelerisque felis imperdiet. Accumsan tortor posuere ac ut consequat semper viverra nam libero. Tempus quam pellentesque nec nam aliquam sem. Mattis vulputate enim nulla aliquet porttitor lacus luctus accumsan tortor. Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Donec pretium vulputate sapien nec sagittis aliquam malesuada bibendum. Molestie at elementum eu facilisis. Est sit amet facilisis magna etiam tempor orci.",
-        //     date: 1637821066623
-        // },
       ],
     };
   },
@@ -119,31 +115,47 @@ export default defineComponent({
     addNewPost(){
       let newPostItem = {
         content: this.newPost,
-        date: Date.now()
+        date: Date.now(),
+        liked: false
       }
-      this.postitem.unshift(newPostItem)
+      // this.postitem.unshift(newPostItem)
+      const docRef = addDoc(collection(firestore, "posts"), newPostItem);
+      console.log("Document written with ID: ", docRef.id);
       this.newPost = ''
     },
     deletePost(postData){
-      let DateToDelete = postData.date
-      let index = this.postitem.findIndex(postData => postData.date === DateToDelete)
-      this.postitem.splice(index, 1)
+    deleteDoc(doc(firestore, "posts", postData.id));
+    },
+
+    toggleLiked(post){
+
+      updateDoc(doc(firestore, "posts", post.id), {
+      liked: !post.liked
+    });
+    
     }
       
   },
 
   mounted(){
-    const q = query(collection(firestore, "posts"));
+    const q = query(collection(firestore, "posts"), orderBy("date"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
     snapshot.docChanges().forEach((change) => {
+      let postChanges = change.doc.data()
+      postChanges.id = change.doc.id
       if (change.type === "added") {
-          console.log("New Post: ", change.doc.data());
+          console.log("New Post: ", postChanges);
+          this.postitem.unshift(postChanges)
       }
       if (change.type === "modified") {
-          console.log("Modified post: ", change.doc.data());
+          console.log("Modified post: ", postChanges);
+          let index = this.postitem.findIndex(postData => postData.id === postChanges.id)
+          Object.assign(this.postitem[index], postChanges)
       }
       if (change.type === "removed") {
-          console.log("Removed post: ", change.doc.data());
+          console.log("Removed post: ", postChanges);
+          let index = this.postitem.findIndex(postData => postData.id === postChanges.id)
+          this.postitem.splice(index, 1)
       }
     });
   });

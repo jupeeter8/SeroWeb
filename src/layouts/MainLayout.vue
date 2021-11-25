@@ -22,7 +22,6 @@
       v-model="leftDrawerOpen"
       side="left"
       bordered
-      dark
       :width="250"
     >
       <q-icon name="fas fa-brain" size="lg" color="primary" class="q-pa-md" />
@@ -45,6 +44,15 @@
             <q-icon name="home" />
           </q-item-section>
           <q-item-section class="text-weight-lg">Home</q-item-section>
+        </q-item>
+
+         <q-item to="test" v-ripple clickable exact>
+          <q-item-section avatar>
+            <q-icon name="quiz" />
+          </q-item-section>
+          <q-item-section class="text-weight-lg"
+            >Take a test</q-item-section
+          >
         </q-item>
 
         <q-item to="find" v-ripple clickable exact>
@@ -79,7 +87,6 @@
       v-model="rightDrawerOpen"
       side="right"
       bordered
-      dark
       :width="250"
     >
       <q-input
@@ -100,8 +107,8 @@
       <q-list separator>
         <q-item>
           <q-item-section>
-            <q-item-label lines="1" class="text-weight-xl"
-              ><strong>Dealing with pandemic stress? You are not alone</strong></q-item-label
+            <q-item-label lines="1"
+              >Dealing with pandemic stress? You are not alone</q-item-label
             >
             <q-item-label caption lines="2"  class="text-grey"
               >Studies show that Americans are reporting an increase in mental
@@ -122,7 +129,7 @@
             <q-item-label lines="1"
               >Tips to Manage Anxiety and Stress</q-item-label
             >
-            <q-item-label caption lines="2"
+            <q-item-label caption lines="2" class="text-grey"
               >Take a time-out. Practice yoga, listen to music, meditate, get a
               massage, or learn relaxation techniques. Stepping back from the
               problem helps clear your head.</q-item-label
@@ -138,7 +145,9 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <keep-alive>
+        <router-view />
+      </keep-alive>
     </q-page-container>
   </q-layout>
 </template>

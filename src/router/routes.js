@@ -11,7 +11,10 @@ const routes = [
       import('pages/find.vue'), name: "Find Therapists" },
       
       { path: '/account', component: () => 
-      import('pages/account.vue'), name: "Account Settings" }
+      import('pages/account.vue'), name: "Account Settings" },
+
+      { path: '/test', component: () => 
+      import('pages/test.vue'), name: "Depression Test" }
     ]
   },
 
