@@ -51,9 +51,9 @@
 
             <q-item-section>
               <q-item-label class="text-subtitle1">
-                <b>Junglee</b>
+                <b>Jannett Mills</b>
                 <span class="text-grey-7">
-                  @Jannet
+                  @jannett_m
                   <br class="lt-md">&bull; {{(toDate(post.date))}}
                   </span>
               </q-item-label>
